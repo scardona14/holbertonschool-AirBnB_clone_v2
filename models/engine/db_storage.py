@@ -27,3 +27,20 @@ class DBStorage:
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
+    def all(self, cls=None):
+        """Returns a dictionary of models currently in storage"""
+        from models import base_model
+        objects = {}
+        
+    def new(self, obj):
+        """Adds new object to storage"""
+        self.__session.add(obj)
+    
+    def save(self):
+        """Commits all changes to the database"""
+        self.__session.commit()
+    
+    def delete(self, obj=None):
+        """Deletes obj from the database"""
+        if obj is not None:
+            self.__session.delete(obj)
