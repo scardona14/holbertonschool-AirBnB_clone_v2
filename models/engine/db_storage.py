@@ -14,3 +14,16 @@ class DBStorage:
 
     def __init__(self):
         """Creates the engine and session to communicate with the database"""
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
+                                       .format(os.getenv('HBNB_MYSQL_USER'),
+                                               os.getenv('HBNB_MYSQL_PWD'),
+                                               os.getenv('HBNB_MYSQL_HOST'),
+                                               os.getenv('HBNB_MYSQL_DB'),
+                                               pool_pre_ping=True))
+        if os.getenv('HBNB_ENV') == 'test':
+            Base.metadata.drop_all(self.__engine)
+        
+        Base.metadata.create_all(self.__engine)
+        Session = sessionmaker(bind=self.__engine)
+        self.__session = Session()
+
