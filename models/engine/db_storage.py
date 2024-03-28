@@ -56,3 +56,10 @@ class DBStorage:
         """Deletes obj from the database"""
         if obj is not None:
             self.__session.delete(obj)
+    
+    def reload(self):
+        """Creates all tables in the database"""
+        from models.base_model import Base
+        Base.metadata.create_all(self.__engine)
+        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        self.__session = scoped_session(Session)
