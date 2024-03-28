@@ -51,7 +51,7 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            """returns list of review instances with place_id"""
+            """Returns list of review instances with place_id"""
             from models import storage
             all_reviews = storage.all(Review)
             r_list = []
@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            """returns the list of Amenity instances"""
+            """Returns the list of Amenity instances"""
             from models import storage
             all_amenities = storage.all(Amenity)
             a_list = []
@@ -73,7 +73,7 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
-            """method for adding an Amenity.id to the"""
+            """Method for adding an Amenity.id to the"""
             if obj is not None:
                 if isinstance(obj, Amenity):
                     if obj.id not in self.amenity_ids:
