@@ -31,7 +31,19 @@ class DBStorage:
         """Returns a dictionary of models currently in storage"""
         from models import base_model
         objects = {}
-        
+        if cls:
+            query = self.__session.query(eval(cls))
+            for obj in query:
+                key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                objects[key] = obj
+        else:
+            for cls in base_model.Base.__subclasses__():
+                query = self.__session.query(cls)
+                for obj in query:
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                    objects[key] = obj
+        return objects
+            
     def new(self, obj):
         """Adds new object to storage"""
         self.__session.add(obj)
