@@ -27,12 +27,8 @@ class HBNBCommand(cmd.Cmd):
                'State': State, 'City': City, 'Amenity': Amenity,
                'Review': Review
               }
+    
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
-    types = {
-             'number_rooms': int, 'number_bathrooms': int,
-             'max_guest': int, 'price_by_night': int,
-             'latitude': float, 'longitude': float
-            }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -192,7 +188,6 @@ class HBNBCommand(cmd.Cmd):
         key = class_name + "." + obj_id
 
         try:
-            obj = storage.all()[key]
             del storage.all()[key]
             storage.save()
         except KeyError:
