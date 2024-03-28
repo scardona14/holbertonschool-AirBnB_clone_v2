@@ -175,28 +175,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ Destroys a specified object """
-        new = args.partition(" ")
-        c_name = new[0]
-        c_id = new[2]
-        if c_id and ' ' in c_id:
-            c_id = c_id.partition(' ')[0]
+        class_name, _, obj_id = args.partition(' ')
 
-        if not c_name:
+        if not class_name:
             print("** class name missing **")
             return
-
-        if c_name not in HBNBCommand.classes:
+        
+        if class_name not in self.classes:
             print("** class doesn't exist **")
             return
-
-        if not c_id:
+        
+        if not obj_id:
             print("** instance id missing **")
             return
-
-        key = c_name + "." + c_id
+        
+        key = class_name + "." + obj_id
 
         try:
-            storage.delete(storage.all()[key])
+            obj = storage.all()[key]
+            del storage.all()[key]
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -211,17 +208,14 @@ class HBNBCommand(cmd.Cmd):
         print_list = []
 
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            class_name = args.split(' ')[0]  # remove possible trailing args
+            if class_name not in self.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage.all().items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            print_list = [str(obj) for obj in storage.all(args).values() if type(obj).__name__ == class_name]
         else:
-            for k, v in storage.all().items():
-                print_list.append(str(v))
-
+            print_list = [str(obj) for obj in storage.all().values()]
+        
         print(print_list)
 
     def help_all(self):
