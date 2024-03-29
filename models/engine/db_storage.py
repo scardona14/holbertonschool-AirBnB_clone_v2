@@ -20,6 +20,8 @@ classes = {"State": State, "City": City, "User": User,
 
 
 class DBStorage:
+    """classe that defines dbstorage instances"""
+
     __engine = None
     __session = None
 
