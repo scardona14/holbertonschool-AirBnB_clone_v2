@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""test for file storage"""
+""" Test for file storage"""
 import unittest
 import pep8
 
 
 class TestDBStorage(unittest.TestCase):
-    '''Tests the DBStorage storage engine'''
+    """ Tests the DBStorage storage engine""" 
 
     def setUp(self):
         """SetUp env for test"""
@@ -24,18 +24,15 @@ class TestDBStorage(unittest.TestCase):
         pass
 
     def test_save(self):
-        """Test save method
-        """
+        """Test save method"""
         pass
 
     def test_delete(self):
-        """Tests delete
-        """
+        """Tests delete"""
         pass
 
     def test_reload(self):
-        """Tests reload
-        """
+        """Tests reload"""
         pass
 
 if __name__ == "__main__":
