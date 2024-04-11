@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-
-"""Start web application with two routings
-
-"""
+"""Start web application with two routings"""
 
 from models import storage
 from models.state import State
@@ -13,8 +10,7 @@ app = Flask(__name__)
 
 @app.route('/states_list')
 def states_list():
-    """Render template with states
-    """
+    """Render template with states"""
     path = '7-states_list.html'
     states = storage.all(State)
     # sort State object alphabetically by name
@@ -24,8 +20,7 @@ def states_list():
 
 @app.teardown_appcontext
 def app_teardown(arg=None):
-    """Clean-up session
-    """
+    """Clean-up session"""
     storage.close()
 
 
