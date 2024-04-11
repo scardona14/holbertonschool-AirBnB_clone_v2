@@ -6,6 +6,7 @@ from models import storage
 from models.state import State
 from models.amenity import Amenity
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 
