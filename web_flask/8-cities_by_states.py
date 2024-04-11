@@ -5,11 +5,12 @@
 from models import storage
 from models.state import State
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 
 @app.route('/cities_by_states')
-def states_list():
+def cities_by_states():
     """Render template with states
     """
     path = '8-cities_by_states.html'
