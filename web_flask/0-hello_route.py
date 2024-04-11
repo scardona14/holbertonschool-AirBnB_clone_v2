@@ -11,9 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_flask():
-    """
-    Return string when route queried.
-    """
+    """Return string when route queried."""
     return 'Hello HBNB!'
 
 
